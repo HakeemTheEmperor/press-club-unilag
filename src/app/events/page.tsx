@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { ArrowLeft, Calendar, MapPin, Users } from "lucide-react";
+import { Calendar, MapPin, Users } from "lucide-react";
 
 export default function Events() {
   const events = [

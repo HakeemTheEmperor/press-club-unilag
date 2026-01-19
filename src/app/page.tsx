@@ -3,7 +3,6 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import Image from "next/image";
 import { Metadata } from "next";
 import ScrollAnimation from "@/components/ui/scroll-animation";
-import Carousel from "@/components/ui/carousel";
 
 export const metadata: Metadata = {
   title: "Unilag Press Club - Student Journalism & Media",

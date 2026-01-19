@@ -50,6 +50,11 @@ export default function Carousel() {
   const [direction, setDirection] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  const nextSlide = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % ITEMS.length);
+  };
+
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
@@ -57,11 +62,6 @@ export default function Carousel() {
     }, 5000);
     return () => clearInterval(timer);
   }, [currentIndex, isPaused]);
-
-  const nextSlide = () => {
-    setDirection(1);
-    setCurrentIndex((prev) => (prev + 1) % ITEMS.length);
-  };
 
   const prevSlide = () => {
     setDirection(-1);
@@ -94,12 +94,16 @@ export default function Carousel() {
   };
 
   return (
-    <div 
+    <div
       className="relative w-full max-w-5xl mx-auto h-[550px] md:h-[400px] overflow-hidden rounded-2xl bg-muted/20 border border-border/50 shadow-2xl"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <AnimatePresence initial={false} custom={direction} mode="popLayout">
+      <AnimatePresence
+        initial={false}
+        custom={direction}
+        mode="popLayout"
+      >
         <motion.div
           key={currentIndex}
           custom={direction}
@@ -118,52 +122,50 @@ export default function Carousel() {
           className="absolute inset-0 flex items-center justify-center p-6 sm:p-12 cursor-grab active:cursor-grabbing"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center w-full h-full">
-            
             {/* Visual Element decoration (Desktop only background effect) */}
             <div className="absolute right-0 top-0 bottom-0 w-2/3 bg-linear-to-l from-primary/10 to-transparent pointer-events-none -z-10 hidden md:block" />
 
             {/* Image Section - Order First on Mobile */}
             <div className="relative w-full h-48 sm:h-64 md:h-full order-first md:order-last flex items-center justify-center">
-                <div className="w-full h-full rounded-xl border border-border/50 relative overflow-hidden shadow-xl">
-                    <Image
-                        src={ITEMS[currentIndex].image || "/images/hero.png"}
-                        alt={ITEMS[currentIndex].title}
-                        fill
-                        className="object-cover transition-transform duration-700 hover:scale-105"
-                        draggable={false}
-                    />
-                    <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
-                </div>
+              <div className="w-full h-full rounded-xl border border-border/50 relative overflow-hidden shadow-xl">
+                <Image
+                  src={ITEMS[currentIndex].image || "/images/hero.png"}
+                  alt={ITEMS[currentIndex].title}
+                  fill
+                  className="object-cover transition-transform duration-700 hover:scale-105"
+                  draggable={false}
+                />
+                <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
+              </div>
             </div>
 
             {/* Text Content - Order Second on Mobile */}
             <div className="flex flex-col gap-3 md:gap-4 z-10 order-last md:order-first text-center md:text-left items-center md:items-start">
-                <motion.span 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="text-primary font-mono text-xs sm:text-sm tracking-wider uppercase bg-primary/10 px-2 py-1 rounded-md"
-                >
-                    {ITEMS[currentIndex].date}
-                </motion.span>
-                <motion.h3 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground line-clamp-2"
-                >
-                    {ITEMS[currentIndex].title}
-                </motion.h3>
-                <motion.p 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="text-base sm:text-lg text-muted-foreground line-clamp-3 md:line-clamp-none"
-                >
-                    {ITEMS[currentIndex].description}
-                </motion.p>
+              <motion.span
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-primary font-mono text-xs sm:text-sm tracking-wider uppercase bg-primary/10 px-2 py-1 rounded-md"
+              >
+                {ITEMS[currentIndex].date}
+              </motion.span>
+              <motion.h3
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground line-clamp-2"
+              >
+                {ITEMS[currentIndex].title}
+              </motion.h3>
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="text-base sm:text-lg text-muted-foreground line-clamp-3 md:line-clamp-none"
+              >
+                {ITEMS[currentIndex].description}
+              </motion.p>
             </div>
-            
           </div>
         </motion.div>
       </AnimatePresence>
@@ -185,22 +187,24 @@ export default function Carousel() {
           <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
         </button>
       </div>
-      
+
       {/* Progress Indicators */}
       <div className="absolute bottom-4 left-4 md:bottom-6 md:left-6 flex gap-2 z-20">
         {ITEMS.map((_, idx) => (
-            <button
-                key={idx}
-                onClick={() => {
-                    setDirection(idx > currentIndex ? 1 : -1);
-                    setCurrentIndex(idx);
-                }}
-                className={cn(
-                    "w-2 h-2 rounded-full transition-all duration-300 shadow-sm",
-                    idx === currentIndex ? "w-6 md:w-8 bg-primary" : "bg-primary/30 hover:bg-primary/50"
-                )}
-                aria-label={`Go to slide ${idx + 1}`}
-            />
+          <button
+            key={idx}
+            onClick={() => {
+              setDirection(idx > currentIndex ? 1 : -1);
+              setCurrentIndex(idx);
+            }}
+            className={cn(
+              "w-2 h-2 rounded-full transition-all duration-300 shadow-sm",
+              idx === currentIndex
+                ? "w-6 md:w-8 bg-primary"
+                : "bg-primary/30 hover:bg-primary/50",
+            )}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
         ))}
       </div>
     </div>

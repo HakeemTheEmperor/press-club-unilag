@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
 import ScrollAnimation from "@/components/ui/scroll-animation";
 import ExecutiveModal, { Executive } from "@/components/ui/executive-modal";
 
@@ -180,7 +178,7 @@ export default function Executives() {
       <section className="py-20 sm:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {filteredExecutives.map((executive, index) => (
+            {filteredExecutives.map((executive, _index) => (
               <ScrollAnimation
                 key={executive.name}
                 className="group"
