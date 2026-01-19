@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -68,7 +68,7 @@ export default function Carousel() {
     setCurrentIndex((prev) => (prev - 1 + ITEMS.length) % ITEMS.length);
   };
 
-  const handleDragEnd = (event: any, info: any) => {
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
     if (info.offset.x > 100) {
       prevSlide();
     } else if (info.offset.x < -100) {

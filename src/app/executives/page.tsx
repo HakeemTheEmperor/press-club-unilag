@@ -178,7 +178,7 @@ export default function Executives() {
       <section className="py-20 sm:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {filteredExecutives.map((executive, _index) => (
+            {filteredExecutives.map((executive) => (
               <ScrollAnimation
                 key={executive.name}
                 className="group"
