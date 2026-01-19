@@ -54,19 +54,6 @@ export default function Events() {
   ];
   return (
     <>
-      {/* Back Link */}
-      <div className="border-b border-border">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-primary hover:text-accent transition-colors w-fit"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
-          </Link>
-        </div>
-      </div>
-
       {/* Hero Section */}
       <section className="border-b border-border py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
