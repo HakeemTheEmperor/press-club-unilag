@@ -1,7 +1,9 @@
 "use client";
 
-import { Mail, Newspaper } from "lucide-react";
+import { Mail } from "lucide-react";
 import Link from "next/link";
+
+import Image from "next/image";
 
 export function Footer() {
   return (
@@ -13,10 +15,22 @@ export function Footer() {
               href="/"
               className="flex items-center gap-2 w-fit"
             >
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Newspaper className="h-5 w-5 text-primary-foreground" />
+              <div className="relative h-16 w-16 flex items-center justify-center">
+                <Image
+                  src="/logo.jpg"
+                  alt="Unilag Press Club Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
-              <span className="font-bold text-foreground">Unilag Press</span>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold text-foreground leading-none">
+                  The Press Club
+                </span>
+                <span className="text-xs text-muted-foreground font-medium">
+                  University of Lagos
+                </span>
+              </div>
             </Link>
             <p className="text-sm text-muted-foreground">
               Student journalism excellence at the University of Lagos.

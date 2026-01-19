@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Newspaper, Menu, X } from "lucide-react";
+import Image from "next/image";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { NavItem } from "@/types/nav";
@@ -13,7 +14,7 @@ export function Navigation() {
   const navItems = [
     { href: "/about", label: "About" },
     { href: "/executives", label: "Executives" },
-    { href: "https://blog.unilagpress.com", label: "Blog", external: true },
+    { href: "https://unilagnews.com/", label: "Blog", external: true },
     { href: "/events", label: "Events" },
   ] satisfies NavItem[];
 
@@ -25,12 +26,22 @@ export function Navigation() {
             href="/"
             className="flex items-center gap-2"
           >
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-              <Newspaper className="h-5 w-5 text-primary-foreground" />
+            <div className="relative h-16 w-16 flex items-center justify-center">
+              <Image
+                src="/logo.jpg"
+                alt="Unilag Press Club Logo"
+                fill
+                className="object-contain"
+              />
             </div>
-            <span className="text-xl font-bold text-foreground">
-              Unilag Press
-            </span>
+            <div className="flex flex-col">
+              <span className="text-xl font-bold text-foreground leading-none">
+                The Press Club
+              </span>
+              <span className="text-xs text-muted-foreground font-medium">
+                University of Lagos
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
